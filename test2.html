@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meet Jessy</title>
+  <!-- <link rel="stylesheet" href="styles.css" /> -->
+   <style>
+    body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #fefaf7;
+  color: #000;
+}
+
+.profile-section {
+  padding: 2rem;
+}
+
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.profile-image {
+  flex: 1 1 35%;
+  min-width: 280px;
+}
+
+.profile-image img {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.profile-text {
+  flex: 1 1 60%;
+  min-width: 300px;
+}
+
+.profile-text h2 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.profile-text p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.profile-text h3 {
+  margin-top: 2rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+.profile-text h3 span {
+  display: block;
+  font-style: normal;
+  font-size: 1rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.contact-info div span {
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+  }
+
+  .profile-text h2 {
+    text-align: center;
+  }
+
+  .profile-text h3 {
+    text-align: center;
+  }
+
+  .contact-info {
+    align-items: center;
+  }
+}
+
+   </style>
+</head>
+<body>
+
+  <section class="profile-section">
+    <div class="profile-container">
+
+      <!-- Left: Image -->
+      <div class="profile-image">
+        <img src="assets/19.png" alt="Jessy P. Halaby">
+      </div>
+
+      <!-- Right: Content -->
+      <div class="profile-text">
+        <h2>MEET JESSY</h2>
+        <p>
+          Dedicated to empowering women and children in underserved communities, Jessy leads Kelsey’s Kloset with compassion, expertise, and a deep commitment to health and social equity. As Executive Director, she oversees the creation and execution of strategic programs and development of community partnerships to ensure mothers and their infant children receive the support they need to thrive.
+        </p>
+        <p>
+          With a background in education, mental health therapy, and nonprofit community service, Jessy has spent over 25 years working to remove barriers to educational equity and essential social services, primarily for children and families. Prior to her role as executive director of Kelsey’s Kloset, Jessy has always been a leading advocate for women and girls; namely through her work with the Atlanta Women’s Foundation Inspire Atlanta program as a top fundraiser, community volunteering with the Junior League of Atlanta, and she served for six years on the Board of a prominent all girls school in Baltimore County, MD as the chair of their diversity efforts.
+        </p>
+        <p>
+          As a mental health private practice owner, Jessy is a strengths–based therapist who is dedicated to enhancing resilience amongst her clients. Her career in education as a teacher and administrator focused on collaborative work with parents to improve learning outcomes for their children. Through her professional and personal experiences, Jessy has demonstrated her dedication to empowering underserved families. She believes that when women thrive, their children flourish, and societies ultimately grow stronger. Jessy’s commitment to Kelsey’s Kloset will continue to highlight the significance of supporting women and children in their most vulnerable moments.
+        </p>
+        <h3>JESSY P. HALABY,<br><span>EXECUTIVE DIRECTOR</span></h3>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <div><span>📍</span> Woodstock, GA</div>
+          <div><span>📞</span> +91 (123) 456-7890</div>
+          <div><span>✉️</span> info@kelseyskloset.org</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Add this inside <head> -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.contact-info div:nth-child(2)').addEventListener('click', () => {
+        window.location.href = 'tel:+911234567890';
+      });
+      document.querySelector('.contact-info div:nth-child(3)').addEventListener('click', () => {
+        window.location.href = 'mailto:info@kelseyskloset.org';
+      });
+    });
+  </script>
+  
+</body>
+</html>
