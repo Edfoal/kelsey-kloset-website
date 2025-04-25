@@ -1,738 +1,891 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kelsey's Kloset</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      width: 100%;
-      font-family: Arial, sans-serif;
-    }
-
-    .half-screen-image-1 {
-      width: 100%;
-      height: 50vh; /* 50% of the viewport height */
-      object-fit: cover;
-      display: block;
-    }
-    .half-screen-image-2 {
-      width: 100%; /* 50% of the viewport height */
-      object-fit: cover;
-      display: block;
-    }
-    .half-screen-image:hover {
-      transform: scale(1.01);
-      cursor: pointer;
-    }
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .button-overlay {
-      position: absolute;
-      bottom: 50px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: transparent;
-      padding: 12px 30px;
-      border: 1px solid #333;
-      text-transform: uppercase;
-      font-weight: bold;
-      letter-spacing: 2px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .button-overlay:hover {
-      background-color: transparent;
-      color: #000;
-      border-color: #000;
-    }
-    .fourth-container {
-      display: flex;
-      height: 100vh;
-    }
-
-    .left {
-      flex: 1;
-      padding: 4rem;
-      overflow-y: auto;
-    }
-
-    .left h2 {
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-      font-weight: 500;
-      text-align: center;
-    }
-
-    .left p {
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-      font-size: 1.05rem;
-    }
-
-    .left .highlight {
-      color: #5e989c;
-      font-weight: bold;
-    }
-
-    .left h3 {
-      text-align: right;
-      letter-spacing: 0.4rem;
-      margin-top: 3rem;
-      font-size: 1.2rem;
-    }
-
-    .right {
-      flex: 1;
-      background: url('assets/4.png') no-repeat center center;
-      background-size: cover;
-    }
-    .mission-section {
-      background: url('assets/5.png') no-repeat center center;
-      background-size: cover;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #000;
-      padding: 0 2rem;
-      position: relative;
-    }
-
-    .mission-content {
-      max-width: 900px;
-      backdrop-filter: blur(5px);
-      padding: 3rem 2rem;
-      border-radius: 1rem;
-    }
-
-    .mission-content h2 {
-      font-size: 2rem;
-      letter-spacing: 0.3rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .mission-content p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 2rem;
-    }
-
-    .donate-btn {
-      display: inline-block;
-      padding: 0.75rem 2rem;
-      font-size: 1rem;
-      letter-spacing: 0.2rem;
-      background: transparent;
-      border: 2px solid #000;
-      border-radius: 2rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-    }
-
-    .donate-btn:hover {
-      background-color: #000;
-      color: #fff;
-    }
-    .vision-section {
-        padding: 3rem;
-      text-align: center;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .vision-section h2 {
-      font-size: 2rem;
-      letter-spacing: 0.3rem;
-      margin-bottom: 2rem;
-    }
-
-    .vision-images {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .vision-images img {
-      width: 220px;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .vision-text {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      padding: 0 1rem;
-    }
-
-    @media (max-width: 768px) {
-      .vision-images img {
-        width: 100%;
-        max-width: 300px;
-        height: auto;
-      }
-    }
-    .why-section {
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-      min-height: 100vh;
-    }
-
-    .left-side {
-      background-image: url('assets/10.png'); /* Replace with your image path */
-      background-size: cover;
-      background-position: center;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      position: relative;
-    }
-
-    .quote-box {
-      /* background-color: rgba(255, 255, 255, 0.3); */
-      border: 2px solid #000;
-      padding: 1.5rem;
-      font-style: italic;
-      font-weight: bold;
-      max-width: 400px;
-      color: #000;
-      /* backdrop-filter: blur(5px);s */
-    }
-
-    .quote-box::after {
-      content: "- Nelson Mandela";
-      display: block;
-      margin-top: 1rem;
-      font-style: normal;
-      font-weight: bold;
-      text-align: right;
-    }
-
-    .right-side {
-      flex: 1;
-      background-color: #fffaf7;
-      padding: 4rem 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .right-side h2 {
-      letter-spacing: 0.4rem;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .right-side p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 2rem;
-      padding: 0 1rem;
-    }
-
-    .donate-btn {
-      border: 2px solid #000;
-      padding: 0.8rem 2rem;
-      font-size: 1rem;
-      background: transparent;
-      cursor: pointer;
-      letter-spacing: 0.2rem;
-      transition: 0.3s ease;
-      margin: 0 auto;
-    }
-
-    .donate-btn:hover {
-      background: #000;
-      color: #fff;
-    }
-
-    @media (max-width: 900px) {
-      .why-section {
-        flex-direction: column;
-      }
-      .left-side, .right-side {
-        width: 100%;
-      }
-    }
-    .why-donate-section { /* Ensure image is in same folder */
-      background-size: cover;
-      background-position: center;
-      padding: 4rem 2rem;
-    }
-
-    .why-donate-section h2 {
-      text-align: center;
-      font-size: 2rem;
-      letter-spacing: 0.3rem;
-      margin-bottom: 3rem;
-    }
-
-    .donate-box {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      border: 1px solid #000;
-      padding: 1.5rem;
-      margin: 1.5rem auto;
-      max-width: 1000px;
-      background-color: rgba(255, 255, 255, 0.8);
-    }
-
-    .donate-box .left {
-      flex: 1;
-      font-weight: bold;
-      font-size: 1.1rem;
-      margin-right: 1.5rem;
-      min-width: 250px;
-    }
-
-    .donate-box .right {
-      flex: 2;
-      font-size: 1rem;
-    }
-
-    @media (max-width: 768px) {
-      .donate-box {
-        flex-direction: column;
-      }
-      .donate-box .left {
-        margin-bottom: 1rem;
-        margin-right: 0;
-      }
-    }
-    .donate-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: stretch;
-      padding: 2rem;
-      background-image: url('11.png');
-      background-size: cover;
-      background-position: bottom;
-    }
-
-    .image-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      width: 45%;
-    }
-
-    .image-grid img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-
-    .divider {
-      width: 1px;
-      background-color: #000;
-      margin: 0 2rem;
-    }
-
-    .donation-options {
-      display: flex;
-      flex-direction: row; /* updated */
-      gap: 2rem;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .donation-card {
-      width: 250px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      background-color: #000;
-      color: #fff;
-    }
-
-    .donation-card .overlay {
-      padding: 1rem;
-      text-align: center;
-      font-weight: bold;
-      background: rgba(0, 0, 0, 0.6);
-    }
-
-    .donation-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .donation-card .footer {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .donation-card input {
-      width: 80%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 4px;
-      text-align: center;
-    }
-
-    .donate-button-container {
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .donate-button {
-      padding: 1rem 3rem;
-      font-size: 1.2rem;
-      border: 2px solid #000;
-      background: transparent;
-      letter-spacing: 2px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .donate-button:hover {
-      background: #000;
-      color: #fff;
-    }
-
-    @media (max-width: 992px) {
-      .donate-container {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .image-grid, .donation-options {
-        width: 100%;
-      }
-
-      .divider {
-        display: none;
-      }
-
-      .donation-options {
-        justify-content: center;
-      }
-    }
-    .profile-section {
-  padding: 2rem;
-}
-
-.profile-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: flex-start;
-}
-
-.profile-image {
-  flex: 1 1 35%;
-  min-width: 280px;
-}
-
-.profile-image img {
-  width: 100%;
-  border-radius: 4px;
-  object-fit: cover;
-}
-
-.profile-text {
-  flex: 1 1 60%;
-  min-width: 300px;
-}
-
-.profile-text h2 {
-  font-size: 2rem;
-  letter-spacing: 2px;
-  margin-bottom: 1rem;
-}
-
-.profile-text p {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  font-size: 1rem;
-}
-
-.profile-text h3 {
-  margin-top: 2rem;
-  font-weight: bold;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  font-style: italic;
-  letter-spacing: 1px;
-}
-
-.profile-text h3 span {
-  display: block;
-  font-style: normal;
-  font-size: 1rem;
-}
-
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  font-size: 0.95rem;
-}
-
-.contact-info div span {
-  font-size: 1.2rem;
-  margin-right: 8px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .profile-container {
-    flex-direction: column;
-  }
-
-  .profile-text h2 {
-    text-align: center;
-  }
-
-  .profile-text h3 {
-    text-align: center;
-  }
-
-  .contact-info {
-    align-items: center;
-  }
-}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kelsey's Kloset</title>
+    <style>
+        @font-face {
+            font-family: 'heading';
+            src: url('./assets/fonts/Proxima-Nova-Alt-Condensed-Regular.otf') format('otf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'paragraph';
+            src: url('./assets/fonts/TTHoves-Regular.ttf') format('ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            /* font-family: Arial, sans-serif; */
+        }
+
+        .half-screen-image-1 {
+            width: 100%;
+            height: 50vh;
+            object-fit: cover;
+            display: block;
+        }
+
+        .half-screen-image-2 {
+            width: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .half-screen-image:hover {
+            transform: scale(1.01);
+            cursor: pointer;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .button-overlay {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: transparent;
+            padding: 12px 30px;
+            border: 1px solid #333;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button-overlay:hover {
+            background-color: transparent;
+            color: #000;
+            border-color: #000;
+        }
+
+        .defining-need {
+            background-image: url('./assets/bg.png');
+            /* adjust path if needed */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .fourth-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .left {
+            flex: 1;
+            padding: 4rem;
+            overflow-y: auto;
+        }
+
+        .left h2 {
+            margin-bottom: 1.5rem;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            font-family: 'paragraph';
+        }
+
+        .left p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 16px;
+            font-family: 'paragraph';
+        }
+
+        .left .highlight {
+            color: #5e989c;
+            font-weight: bold;
+        }
+
+        .left h3 {
+            text-align: right;
+            letter-spacing: 0.4rem;
+            margin-top: 3rem;
+            font-size: 1.2rem;
+            /* font-family: ; */
+        }
+
+        .right {
+            flex: 1;
+            background: url('assets/4svg.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .mission-section {
+            background: url('assets/5svg.jpg') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #000;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .mission-content {
+            max-width: 900px;
+            backdrop-filter: blur(5px);
+            padding: 3rem 2rem;
+            border-radius: 1rem;
+        }
+
+        .mission-content h2 {
+            font-size: 2rem;
+            letter-spacing: 0.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .donate-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            letter-spacing: 0.2rem;
+            background: transparent;
+            border: 2px solid #000;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .donate-btn:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .vision-section {
+            padding: 3rem;
+            text-align: center;
+            margin: auto;
+            background-image: url('./assets/bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .vision-section h2 {
+            font-size: 2rem;
+            letter-spacing: 0.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .vision-images {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .vision-images img {
+            width: 220px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .vision-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            padding: 0 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .vision-images img {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+            }
+        }
+
+        .why-section {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .left-side {
+            background-image: url('assets/10svg.png');
+            /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .quote-box {
+            /* background-color: rgba(255, 255, 255, 0.3); */
+            border: 2px solid #000;
+            padding: 1.5rem;
+            font-style: italic;
+            font-weight: bold;
+            max-width: 400px;
+            color: #000;
+            /* backdrop-filter: blur(5px);s */
+        }
+
+        .quote-box::after {
+            content: "- Nelson Mandela";
+            display: block;
+            margin-top: 1rem;
+            font-style: normal;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .right-side {
+            flex: 1;
+            background-color: #fffaf7;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            background-image: url('./assets/bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .right-side h2 {
+            letter-spacing: 0.4rem;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .right-side p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .donate-btn {
+            border: 2px solid #000;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            background: transparent;
+            cursor: pointer;
+            letter-spacing: 0.2rem;
+            transition: 0.3s ease;
+            margin: 0 auto;
+        }
+
+        .donate-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        @media (max-width: 900px) {
+            .why-section {
+                flex-direction: column;
+            }
+
+            .left-side,
+            .right-side {
+                width: 100%;
+            }
+        }
+
+        .why-donate-section {
+            padding: 4rem 2rem;
+            background-image: url('./assets/bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .why-donate-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            letter-spacing: 0.3rem;
+            margin-bottom: 3rem;
+        }
+
+        .donate-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border: 1px solid #000;
+            padding: 1.5rem;
+            margin: 1.5rem auto;
+            max-width: 1000px;
+            background-color: transparent;
+        }
+
+        .donate-box-left {
+            flex: 1;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-right: 1.5rem;
+            min-width: 250px;
+        }
+
+        .donate-box-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .donate-box {
+                flex-direction: column;
+            }
+
+            .donate-box .left {
+                margin-bottom: 1rem;
+                margin-right: 0;
+            }
+        }
+
+        .donate-section {
+            background-image: url('./assets/bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat
+        }
+
+        .donate-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            padding: 2rem;
+            background-image: url('11.png');
+            background-size: cover;
+            background-position: bottom;
+        }
+
+        .image-grid {
+            width: 50%;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .divider {
+            width: 1px;
+            background-color: #000;
+            margin: 0 2rem;
+        }
+
+        .donation-options {
+            display: flex;
+            flex-direction: row;
+            /* updated */
+            gap: 2rem;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .donation-card {
+            width: 250px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background-image: url('./assets/greenbg.png');
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .donation-card .overlay {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .donation-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .donation-card .footer {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .donation-card input {
+            width: 80%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .donate-button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .donate-button {
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border: 2px solid #000;
+            background: transparent;
+            letter-spacing: 2px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .donate-button:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        @media (max-width: 992px) {
+            .donate-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .image-grid,
+            .donation-options {
+                width: 100%;
+            }
+
+            .divider {
+                display: none;
+            }
+
+            .donation-options {
+                justify-content: center;
+            }
+        }
+
+        .profile-section {
+            padding: 2rem;
+            background-image: url('./assets/bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 40px 20px;
+        }
+
+        .profile-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .profile-image {
+            flex: 1 1 35%;
+            min-width: 280px;
+            margin-bottom: 24px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .profile-text {
+            flex: 1 1 60%;
+            min-width: 300px;
+        }
+
+        .profile-text h2 {
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .profile-text p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .profile-text h3 {
+            margin-top: 2rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .profile-text h3 span {
+            display: block;
+            font-style: normal;
+            font-size: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            /* adds spacing between items */
+            align-items: center;
+            /* optional: aligns icons/text vertically */
+            flex-wrap: wrap;
+        }
+
+        .contact-info div span {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+            }
+
+            .profile-text h2 {
+                text-align: center;
+            }
+
+            .profile-text h3 {
+                text-align: center;
+            }
+
+            .profile-text p {
+                font-size: 14px;
+            }
+
+            .contact-info {
+                align-items: center;
+                display: flex;
+                gap: 20px;
+                /* space between items */
+                align-items: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <!-- Top Image: Logo -->
-  <img src="assets/1.png" alt="Kelsey's Kloset Logo" class="half-screen-image-1" id="logoImage">
+    <!-- Top Image: Logo -->
+    <img src="assets/1.png" alt="Kelsey's Kloset Logo" class="half-screen-image-1" id="logoImage">
 
-  <!-- Bottom Image: Mother and Baby
+    <!-- Bottom Image: Mother and Baby
   <img src="assets/2.png" 
        alt="Mother and Baby" class="half-screen-image-2" id="babyImage"> -->
-       <div class="hero">
+    <div class="hero">
         <img src="assets/2.png" alt="Mother and Baby" />
         <div class="button-overlay" onclick="handleLearnMore()">Learn More</div>
-      </div>
-      <div class="fourth-container">
-        <div class="left">
-          <h2>Let's start with the basics.</h2>
-          <p>
-            A medically underserved area or hospital is defined as an area or population with too few primary care providers, high infant mortality, high poverty, or a high elderly population. For medically underserved newborns, this means that children are literally born into circumstances where not even the most basic infant needs are being met. Here we see children being born into by abject familial poverty and single parent homes with a parent(s) who either do not have health insurance, cannot afford it, or have inadequate coverage to absorb the demand and costs of caring for a newborn. In these homes basic necessities, such as diapers, clothing, bottles, and other basic necessities become nearly impossible to come by.
-          </p>
-          <p>
-            These children rely on the donations or people and organizations like Kelsey's Kloset to step in and provide for those in need. The mission of Kelsey's Kloset is to ensure that we provide a <span class="highlight">safe start</span> through our partnerships with Grady and local area hospitals. Through your continued support, we are able to provide families with care packages and resources that preserve lives and ensures that no child falls in the gap. This seemingly small, yet critical gesture has been the single driving force behind Kelsey's Kloset for the past 20 years. We invite you to explore these pages to better understand both the mission and the vision of our organization.
-          </p>
-          <h3>DEFINING THE NEED</h3>
+    </div>
+    <section class="defining-need">
+        <div class="fourth-container">
+            <div class="left">
+                <h2>Let's start with the basics.</h2>
+                <p>
+                    A medically underserved area or hospital is defined as an area or population with too few primary
+                    care
+                    providers, high infant mortality, high poverty, or a high elderly population. For medically
+                    underserved
+                    newborns, this means that children are literally born into circumstances where not even the most
+                    basic
+                    infant needs are being met. Here we see children being born into by abject familial poverty and
+                    single
+                    parent homes with a parent(s) who either do not have health insurance, cannot afford it, or have
+                    inadequate coverage to absorb the demand and costs of caring for a newborn. In these homes basic
+                    necessities, such as diapers, clothing, bottles, and other basic necessities become nearly
+                    impossible to
+                    come by.
+                </p>
+                <p>
+                    These children rely on the donations or people and organizations like Kelsey's Kloset to step in and
+                    provide for those in need. The mission of Kelsey's Kloset is to ensure that we provide a <span
+                        class="highlight">safe start</span> through our partnerships with Grady and local area
+                    hospitals.
+                    Through your continued support, we are able to provide families with care packages and resources
+                    that
+                    preserve lives and ensures that no child falls in the gap. This seemingly small, yet critical
+                    gesture
+                    has been the single driving force behind Kelsey's Kloset for the past 20 years. We invite you to
+                    explore
+                    these pages to better understand both the mission and the vision of our organization.
+                </p>
+                <h3>DEFINING THE NEED</h3>
+            </div>
+            <div class="right">
+
+            </div>
         </div>
-        <div class="right">
-            
-        </div>
-      </div>
-      <section class="mission-section">
+    </section>
+
+    <section class="mission-section">
         <div class="mission-content">
-          <h2>OUR MISSION</h2>
-          <p>
-            Kelsey's Kloset is a non-profit 501(c)(3), committed to supporting newborns and families in medically underserved communities by providing critical resources and care during their most vulnerable moments. Through our partnerships with local hospitals, <span style="color:#2a4b8d; font-weight:500;">we supply</span> critical items like diapers, clothing, and bottles to ensure that every child starts life with the basic necessities they deserve. Our mission is to ease the hardships faced by families in need, promoting health, hope, and a brighter future for every newborn we serve.
-          </p>
-          <button class="donate-btn" onclick="handleDonate()">Donate Here</button>
+            <h2>OUR MISSION</h2>
+            <p>
+                Kelsey's Kloset is a non-profit 501(c)(3), committed to supporting newborns and families in medically
+                underserved communities by providing critical resources and care during their most vulnerable moments.
+                Through our partnerships with local hospitals, <span style="color:#2a4b8d; font-weight:500;">we
+                    supply</span> critical items like diapers, clothing, and bottles to ensure that every child starts
+                life with the basic necessities they deserve. Our mission is to ease the hardships faced by families in
+                need, promoting health, hope, and a brighter future for every newborn we serve.
+            </p>
+            <button class="donate-btn" onclick="handleDonate()">Donate Here</button>
         </div>
-      </section>
-      <section class="vision-section">
+    </section>
+    <section class="vision-section">
         <h2>OUR VISION</h2>
-    
+
         <div class="vision-images">
-          <img src="assets/6.png" alt="Baby in NICU"/>
-          <img src="assets/7.png" alt="Nurses and baby"/>
-          <img src="assets/8.png" alt="Newborn closeup"/>
-          <img src="assets/9.png" alt="Baby under light therapy"/>
+            <img src="assets/6svg.png" alt="Baby in NICU" />
+            <img src="assets/7svg.png" alt="Nurses and baby" />
+            <img src="assets/8svg.png" alt="Newborn closeup" />
+            <img src="assets/9svg.png" alt="Baby under light therapy" />
         </div>
-    
+
         <p class="vision-text">
-          The vision of Kelsey’s Kloset is to create a world where every newborn, regardless of circumstance,
-          has access to the basic essentials needed for a healthy start in life. We strive to build stronger,
-          more resilient communities by ensuring that no family in need faces the burden of raising a child
-          without support. Through our continued partnerships and efforts, we aim to provide lasting impact,
-          hope, and stability to the families we serve. Virtually every dollar we spend goes directly into
-          fulfilling and sustaining this vision. We hope that you will join us as we continue to grow and
-          expand our relationships with hospitals throughout Atlanta, GA and beyond.
+            The vision of Kelsey’s Kloset is to create a world where every newborn, regardless of circumstance,
+            has access to the basic essentials needed for a healthy start in life. We strive to build stronger,
+            more resilient communities by ensuring that no family in need faces the burden of raising a child
+            without support. Through our continued partnerships and efforts, we aim to provide lasting impact,
+            hope, and stability to the families we serve. Virtually every dollar we spend goes directly into
+            fulfilling and sustaining this vision. We hope that you will join us as we continue to grow and
+            expand our relationships with hospitals throughout Atlanta, GA and beyond.
         </p>
-      </section>
-      <section class="why-section">
+    </section>
+    <section class="why-section">
         <div class="left-side">
-          <div class="quote-box">
-            Overcoming poverty is not a task of charity, it is an act of justice. Like Slavery and Apartheid, poverty is not natural. It is man-made and it can be overcome and eradicated by the actions of human beings.
-          </div>
+            <div class="quote-box">
+                Overcoming poverty is not a task of charity, it is an act of justice. Like Slavery and Apartheid,
+                poverty is not natural. It is man-made and it can be overcome and eradicated by the actions of human
+                beings.
+            </div>
         </div>
-    
+
         <div class="right-side">
-          <h2>OUR WHY</h2>
-          <p>
-            The U.S. child poverty rate, according to the U.S. Census Bureau's supplemental poverty measure, has risen from 12.4% to 13.7% in just the last few years, meaning there are nearly 10 million children living in poverty.
-          </p>
-          <p>
-            Even more unfortunate is the fact that the U.S. consistently ranks near the bottom of developed nations in terms of child poverty, which means that childhood poverty will continue to be a problem for underprivileged and underserved communities. We know that our work is critical because just as with education, how an infant begins their life has a significant impact on how that child grows and develops throughout their lifetime.
-          </p>
-          <button class="donate-btn">DONATE HERE</button>
+            <h2>OUR WHY</h2>
+            <p>
+                The U.S. child poverty rate, according to the U.S. Census Bureau's supplemental poverty measure, has
+                risen from 12.4% to 13.7% in just the last few years, meaning there are nearly 10 million children
+                living in poverty.
+            </p>
+            <p>
+                Even more unfortunate is the fact that the U.S. consistently ranks near the bottom of developed nations
+                in terms of child poverty, which means that childhood poverty will continue to be a problem for
+                underprivileged and underserved communities. We know that our work is critical because just as with
+                education, how an infant begins their life has a significant impact on how that child grows and develops
+                throughout their lifetime.
+            </p>
+            <button class="donate-btn">DONATE HERE</button>
         </div>
-      </section>
-      <section class="why-donate-section">
+    </section>
+    <section class="why-donate-section">
         <h2>WHY DONATE</h2>
-    
+
         <div class="donate-box">
-          <div class="left">
-            KELSEY’S KLOSET IS A<br>
-            20-YEAR-OLD, 501(C)(3) NON-PROFIT
-          </div>
-          <div class="right">
-            Kelsey’s Kloset is a 20–year-old, 501(c)(3) non–profit.
-            So not only are your donations tax deductible, but a charitable gift of just $100 covers the total cost of one of our New Life Critical Care Packages.
-          </div>
+            <div class="donate-box-left">
+                KELSEY’S KLOSET IS A<br>
+                20-YEAR-OLD, 501(C)(3) NON-PROFIT
+            </div>
+            <div class="donate-box-right">
+                Kelsey’s Kloset is a 20–year-old, 501(c)(3) non–profit.
+                So not only are your donations tax deductible, but a charitable gift of just $100 covers the total cost
+                of one of our New Life Critical Care Packages.
+            </div>
         </div>
-    
+
         <div class="donate-box">
-          <div class="left">
-            EVERY CHILDS JOURNEY IS DIFFERENT, WHICH IS WHY WE ARE STRIVING TO BECOME A CONTINUOUS SUPPORT SYSTEM FOR FAMILIES IN NEED.
-          </div>
-          <div class="right">
-            Each child story and journey is different, which is why we are striving to become a continuous support system for families in need. We see our work as not only necessary, but as a truly selfless act to better the lives of children and families with every dollar we receive.
-          </div>
+            <div class="donate-box-left">
+                EVERY CHILDS JOURNEY IS DIFFERENT, WHICH IS WHY WE ARE STRIVING TO BECOME A CONTINUOUS SUPPORT SYSTEM
+                FOR FAMILIES IN NEED.
+            </div>
+            <div class="donate-box-right">
+                Each child story and journey is different, which is why we are striving to become a continuous support
+                system for families in need. We see our work as not only necessary, but as a truly selfless act to
+                better the lives of children and families with every dollar we receive.
+            </div>
         </div>
-    
+
         <div class="donate-box">
-          <div class="left">
-            NEARLY 100% OF ALL PROCEEDS ARE DEDICATED TO CHILDREN AND FAMILIES IN NEED.
-          </div>
-          <div class="right">
-            Even better nearly 100% of all proceeds are dedicated to children and families in need. All staff and personnel costs are absorbed by the founders to ensure that we help as many households as possible.
-          </div>
+            <div class="donate-box-left">
+                NEARLY 100% OF ALL PROCEEDS ARE DEDICATED TO CHILDREN AND FAMILIES IN NEED.
+            </div>
+            <div class="donate-box-right">
+                Even better nearly 100% of all proceeds are dedicated to children and families in need. All staff and
+                personnel costs are absorbed by the founders to ensure that we help as many households as possible.
+            </div>
         </div>
-      </section>
+    </section>
+    <section class="donate-section">
+        <div class="donate-container">
 
-  <div class="donate-container">
+            <!-- Left: Image Grid -->
+            <div class="image-grid">
+                <img src="assets/11svg.jpg" alt="Baby 1">
+            </div>
 
-    <!-- Left: Image Grid -->
-    <div class="image-grid">
-      <img src="assets/11.png" alt="Baby 1">
-      <img src="assets/12.png" alt="Baby 2">
-      <img src="assets/13.png" alt="Baby 3">
-      <img src="assets/14.png" alt="Baby 4">
-      <img src="assets/15.png" alt="Baby 5">
-      <img src="assets/16.png" alt="Baby 6">
-    </div>
+            <!-- Divider -->
+            <div class="divider"></div>
 
-    <!-- Divider -->
-    <div class="divider"></div>
+            <!-- Right: Donation Options -->
+            <div class="donation-options">
+                <div>
 
-    <!-- Right: Donation Options -->
-    <div class="donation-options">
+                </div>
+                <!-- Donate a Basket -->
+                <div class="donation-card">
+                    <div class="overlay">DONATE<br />A BASKET</div>
+                    <img src="assets/17.png" alt="Basket Donation">
+                    <div class="footer">
+                        $100
+                    </div>
+                </div>
 
-      <!-- Donate a Basket -->
-      <div class="donation-card">
-        <div class="overlay">DONATE<br/>A BASKET</div>
-        <img src="assets/17.png" alt="Basket Donation">
-        <div class="footer">
-          $100
+                <!-- Custom Donation -->
+                <div class="donation-card">
+                    <div class="overlay">CUSTOM<br />DONATION</div>
+                    <img src="assets/18.png" alt="Custom Donation">
+                    <div class="footer">
+                        $$$<br />
+                        <input type="text" placeholder="ENTER AMOUNT" />
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <!-- Custom Donation -->
-      <div class="donation-card">
-        <div class="overlay">CUSTOM<br/>DONATION</div>
-        <img src="assets/18.png" alt="Custom Donation">
-        <div class="footer">
-          $$$<br/>
-          <input type="text" placeholder="ENTER AMOUNT" />
+        <div class="donate-button-container">
+            <button class="donate-button">DONATE HERE</button>
         </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Donate Button -->
-  <div class="donate-button-container">
-    <button class="donate-button">DONATE HERE</button>
-  </div>
-
-  <section class="profile-section">
-    <div class="profile-container">
-
-      <!-- Left: Image -->
-      <div class="profile-image">
-        <img src="assets/19.png" alt="Jessy P. Halaby">
-      </div>
-
-      <!-- Right: Content -->
-      <div class="profile-text">
-        <h2>MEET JESSY</h2>
-        <p>
-          Dedicated to empowering women and children in underserved communities, Jessy leads Kelsey’s Kloset with compassion, expertise, and a deep commitment to health and social equity. As Executive Director, she oversees the creation and execution of strategic programs and development of community partnerships to ensure mothers and their infant children receive the support they need to thrive.
-        </p>
-        <p>
-          With a background in education, mental health therapy, and nonprofit community service, Jessy has spent over 25 years working to remove barriers to educational equity and essential social services, primarily for children and families. Prior to her role as executive director of Kelsey’s Kloset, Jessy has always been a leading advocate for women and girls; namely through her work with the Atlanta Women’s Foundation Inspire Atlanta program as a top fundraiser, community volunteering with the Junior League of Atlanta, and she served for six years on the Board of a prominent all girls school in Baltimore County, MD as the chair of their diversity efforts.
-        </p>
-        <p>
-          As a mental health private practice owner, Jessy is a strengths–based therapist who is dedicated to enhancing resilience amongst her clients. Her career in education as a teacher and administrator focused on collaborative work with parents to improve learning outcomes for their children. Through her professional and personal experiences, Jessy has demonstrated her dedication to empowering underserved families. She believes that when women thrive, their children flourish, and societies ultimately grow stronger. Jessy’s commitment to Kelsey’s Kloset will continue to highlight the significance of supporting women and children in their most vulnerable moments.
-        </p>
-        <h3>JESSY P. HALABY,<br><span>EXECUTIVE DIRECTOR</span></h3>
-
-        <!-- Contact Info -->
-        <div class="contact-info">
-          <div><span>📍</span> Woodstock, GA</div>
-          <div><span>📞</span> +91 (123) 456-7890</div>
-          <div><span>✉️</span> info@kelseyskloset.org</div>
         </div>
+    </section>
 
-      </div>
-    </div>
-  </section>
-  <script>
-    document.getElementById('logoImage').addEventListener('click', function() {
-      alert("Welcome to Kelsey's Kloset!");
-    });
 
-    document.getElementById('babyImage').addEventListener('click', function() {
-      alert("Celebrating the beauty of motherhood 💖");
-    });
+    <!-- Donate Button -->
 
-    function handleLearnMore() {
-      alert("Thank you for your interest in Kelsey's Kloset!");
-      // You can replace the alert with a redirect like:
-      // window.location.href = "your-link.html";
-    }
-  </script>
+
+    <section class="profile-section">
+        <div class="profile-container">
+
+            <!-- Left: Image -->
+            <div class="profile-image">
+                <img src="assets/14svg.png" alt="Jessy P. Halaby">
+
+            </div>
+
+            <!-- Right: Content -->
+            <div class="profile-text">
+                <h2>MEET JESSY</h2>
+                <div style="display: flex; gap: 20px;">
+                    <div style="flex: 1;">
+                        <p>
+                            Dedicated to empowering women and children in underserved communities, Jessy leads Kelsey’s
+                            Kloset with compassion, expertise, and a deep commitment to health and social equity. As
+                            Executive Director, she oversees the creation and execution of strategic programs and
+                            development of community partnerships to ensure mothers and their infant children receive
+                            the support they need to thrive.
+
+                        </p>
+                        <p>
+                            With a background in education, mental health therapy, and nonprofit community service,
+                            Jessy has spent over 25 years working to remove barriers to educational equity and essential
+                            social services, primarily for children and families. Prior to her role as executive
+                            director of Kelsey’s Kloset, Jessy has always been a leading advocate for women and girls;
+                            namely through her work with the Atlanta Women’s Foundation Inspire
+                        </p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p>
+                            Atlanta program as a top fundraiser, community volunteering with the Junior League of
+                            Atlanta, and she served for six years on the Board of a prominent all girls school in
+                            Baltimore County, MD as the chair of their diversity efforts. As a mental health private
+                            practice owner, Jessy is a strengths-based therapist who is dedicated to enhancing
+                            resilience amongst her clients. Her career in education as a teacher and administrator
+                            focused on collaborative work with parents to improve learning outcomes for their children.
+                            Through her professional and personal experiences, Jessy has demonstrated her dedication to
+                            empowering underserved families. She believes that when women thrive, their children
+                            flourish, and societies ultimately grow stronger. Jessy’s commitment to Kelsey’s Kloset will
+                            continue to highlight the significance of supporting women and children in their most
+                            vulnerable moments.
+                        </p>
+                    </div>
+                </div>
+                <h3 style="text-align: right;">JESSY P. HALABY,<br><span>EXECUTIVE DIRECTOR</span></h3>
+
+
+                <!-- Contact Info -->
+
+
+            </div>
+        </div>
+        <hr>
+        <div class="contact-info" style="display: flex; gap: 20px;">
+            <div><span>📍</span> Woodstock, GA</div>
+            <div><span>📞</span> +91 (123) 456-7890</div>
+            <div><span>✉️</span> info@kelseyskloset.org</div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('logoImage').addEventListener('click', function () {
+            alert("Welcome to Kelsey's Kloset!");
+        });
+
+        document.getElementById('babyImage').addEventListener('click', function () {
+            alert("Celebrating the beauty of motherhood 💖");
+        });
+
+        function handleLearnMore() {
+            alert("Thank you for your interest in Kelsey's Kloset!");
+            // You can replace the alert with a redirect like:
+            // window.location.href = "your-link.html";
+        }
+    </script>
 
 </body>
+
 </html>
