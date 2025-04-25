@@ -12,6 +12,7 @@
             font-weight: normal;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'paragraph';
             src: url('./assets/fonts/TTHoves-Regular.ttf') format('ttf');
@@ -140,8 +141,7 @@
         }
 
         .mission-section {
-            background: url('assets/5svg.jpg') no-repeat center center;
-            background-size: cover;
+            position: relative;
             height: 100vh;
             display: flex;
             align-items: center;
@@ -149,7 +149,23 @@
             text-align: center;
             color: #000;
             padding: 0 2rem;
-            position: relative;
+            overflow: hidden;
+            /* prevent background from spilling */
+            z-index: 1;
+        }
+
+        .mission-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/5svg.jpg') no-repeat center center;
+            background-size: cover;
+            opacity: 0.6;
+            /* adjust opacity here */
+            z-index: -1;
         }
 
         .mission-content {
@@ -166,7 +182,7 @@
         }
 
         .mission-content p {
-            font-size: 1.1rem;
+            font-size: 19px;
             line-height: 1.7;
             margin-bottom: 2rem;
         }
@@ -178,7 +194,7 @@
             letter-spacing: 0.2rem;
             background: transparent;
             border: 2px solid #000;
-            border-radius: 2rem;
+            /* border-radius: 2rem; */
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
@@ -243,25 +259,41 @@
         }
 
         .left-side {
-            background-image: url('assets/10svg.png');
-            /* Replace with your image path */
-            background-size: cover;
-            background-position: center;
+            position: relative;
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            position: relative;
+            overflow: hidden;
+            /* Ensures the pseudo-element doesn’t overflow */
+            z-index: 1;
+            /* Keeps content above the background */
+        }
+
+        .left-side::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('assets/10svg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.8;
+            z-index: -1;
+            /* Sends background behind content */
         }
 
         .quote-box {
             /* background-color: rgba(255, 255, 255, 0.3); */
             border: 2px solid #000;
             padding: 1.5rem;
+            font-size: 24px;
             font-style: italic;
             font-weight: bold;
-            max-width: 400px;
+            /* max-width: 400px; */
             color: #000;
             /* backdrop-filter: blur(5px);s */
         }
@@ -276,6 +308,7 @@
         }
 
         .right-side {
+
             flex: 1;
             background-color: #fffaf7;
             padding: 4rem 2rem;
@@ -296,7 +329,7 @@
         }
 
         .right-side p {
-            font-size: 1.1rem;
+            font-size: 19px;
             line-height: 1.8;
             margin-bottom: 2rem;
             padding: 0 1rem;
@@ -338,10 +371,12 @@
         }
 
         .why-donate-section h2 {
-            text-align: center;
+            text-align: left;
+
             font-size: 2rem;
             letter-spacing: 0.3rem;
-            margin-bottom: 3rem;
+            /* margin-bottom: 3rem; */
+            /* margin-left: 11rem; */
         }
 
         .donate-box {
@@ -360,7 +395,7 @@
             font-weight: bold;
             font-size: 1.1rem;
             margin-right: 1.5rem;
-            min-width: 250px;
+            /* min-width: 250px; */
         }
 
         .donate-box-right {
@@ -385,7 +420,8 @@
             background-image: url('./assets/bg.png');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat
+            background-repeat: no-repeat;
+            padding: 4rem 2rem;
         }
 
         .donate-container {
@@ -411,7 +447,7 @@
         }
 
         .divider {
-            width: 1px;
+            width: 3px;
             background-color: #000;
             margin: 0 2rem;
         }
@@ -502,6 +538,7 @@
 
             .divider {
                 display: none;
+
             }
 
             .donation-options {
@@ -570,18 +607,30 @@
             font-size: 1rem;
         }
 
-        .contact-info {
-            display: flex;
-            gap: 20px;
-            /* adds spacing between items */
-            align-items: center;
-            /* optional: aligns icons/text vertically */
-            flex-wrap: wrap;
+        .contact-section {
+            width: 100%;
+            /* background-color: #fff; */
+            /* or use your theme background */
+            /* padding: 2rem 1rem; */
+            padding-top: 15px;
         }
 
-        .contact-info div span {
-            font-size: 1.2rem;
-            margin-right: 8px;
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            /* max-width: 1200px; */
+            margin: 0 auto;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
         }
 
         /* Responsive */
@@ -610,6 +659,16 @@
                 align-items: center;
             }
         }
+        @media (max-width: 768px) {
+    .fourth-container {
+        flex-direction: column;
+        height: auto; /* allow content height */
+    }
+
+    .fourth-container .right {
+        height: 300px; /* or any suitable height */
+    }
+}
     </style>
 </head>
 
@@ -690,13 +749,13 @@
         </div>
 
         <p class="vision-text">
-            The vision of Kelsey’s Kloset is to create a world where every newborn, regardless of circumstance,
-            has access to the basic essentials needed for a healthy start in life. We strive to build stronger,
-            more resilient communities by ensuring that no family in need faces the burden of raising a child
-            without support. Through our continued partnerships and efforts, we aim to provide lasting impact,
-            hope, and stability to the families we serve. Virtually every dollar we spend goes directly into
-            fulfilling and sustaining this vision. We hope that you will join us as we continue to grow and
-            expand our relationships with hospitals throughout Atlanta, GA and beyond.
+            The vision of Kelsey’s Kloset is to create a world where every newborn, regardless of circumstance, has
+            access to the basic essentials needed for a healthy start in life. We strive to build stronger, more
+            resilient communities by ensuring that no family in need faces the burden of raising a child without
+            support. Through our continued partnerships and efforts, we aim to provide lasting impact, hope, and
+            stability to the families we serve. Virtually dollar we spend goes directly in to fulfilling and sustaining
+            this vision. We hope that you will join us as we continue to grow and expand our relationships with
+            hospitals throughout Atlanta, Ga and beyond.
         </p>
     </section>
     <section class="why-section">
@@ -854,7 +913,7 @@
                         </p>
                     </div>
                 </div>
-                <h3 style="text-align: right;">JESSY P. HALABY,<br><span>EXECUTIVE DIRECTOR</span></h3>
+                <h3 style="text-align: right; font-size: 25px;">JESSY P. HALABY,<br><span>EXECUTIVE DIRECTOR</span></h3>
 
 
                 <!-- Contact Info -->
@@ -863,10 +922,21 @@
             </div>
         </div>
         <hr>
-        <div class="contact-info" style="display: flex; gap: 20px;">
-            <div><span>📍</span> Woodstock, GA</div>
-            <div><span>📞</span> +91 (123) 456-7890</div>
-            <div><span>✉️</span> info@kelseyskloset.org</div>
+        <div class="contact-section">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <img src="./assets/location.png" height="30" width="30" alt="Location Icon" />
+                    <span>Woodstock, GA</span>
+                </div>
+                <div class="contact-item">
+                    <img src="./assets/phone.png" height="30" width="30" alt="Phone Icon" />
+                    <span>+91 (123) 456-7890</span>
+                </div>
+                <div class="contact-item">
+                    <img src="./assets/mail.png" height="30" width="30" alt="Mail Icon" />
+                    <span>info@kelseyskloset.org</span>
+                </div>
+            </div>
         </div>
     </section>
 
