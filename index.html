@@ -42,6 +42,7 @@
 
         .half-screen-image-2 {
             width: 100%;
+            height: 50vh;
             object-fit: cover;
             display: block;
         }
@@ -51,11 +52,33 @@
             cursor: pointer;
         }
 
+        #logoImage {
+            width: 100%;
+            /* keep width auto */
+            height: 50vh;
+            /* starting height */
+            position: fixed;
+            /* top: 20px;
+            left: 20px; */
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        /* Shrinking vertically */
+        #logoImage.shrink {
+            height: 80px;
+            /* only height reduces */
+            /* top: 10px; */
+            /* move closer to top */
+        }
+
         .hero {
             position: relative;
             width: 100%;
             height: 100vh;
             overflow: hidden;
+            /* margin-top: 200px; */
+
         }
 
         .hero img {
@@ -781,23 +804,23 @@
                 font-size: 0.9rem;
             }
         }
-        .donate-submit-btn {
-    margin-left: 10px;
-    padding: 6px 12px;
-    background-color: #2a4b8d;
-    color: white;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    margin-top: 24px;
-  }
 
-  .donate-submit-btn:hover {
-    background-color: #1d366c;
-  }
-  
+        .donate-submit-btn {
+            margin-left: 10px;
+            padding: 6px 12px;
+            background-color: #2a4b8d;
+            color: white;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-top: 24px;
+        }
+
+        .donate-submit-btn:hover {
+            background-color: #1d366c;
+        }
     </style>
 </head>
 
@@ -805,6 +828,7 @@
 
     <!-- Top Image: Logo -->
     <img src="assets/1.png" alt="Kelsey's Kloset Logo" class="half-screen-image-1" id="logoImage">
+    <img src="assets/bg.png" alt="Kelsey's Kloset Logo" class="half-screen-image-1">
 
     <!-- Bottom Image: Mother and Baby
   <img src="assets/2.png" 
@@ -999,16 +1023,16 @@
             <div class="divider"></div>
 
             <!-- Right: Donation Options -->
-            <div class="donation-options" >
+            <div class="donation-options">
                 <!-- Donate a Basket -->
-                <div class="donation-card" >
+                <div class="donation-card">
                     <div class="overlay">DONATE A BASKET</div>
                     <img src="assets/12svg.png" alt="Basket Donation">
                     <div class="custom-donation-box">
                         $&nbsp;&nbsp;&nbsp;
                         <input type="text" value="100" readonly />
                         <button class="donate-submit-btn" onclick="submitCustomDonation()">Donate</button>
-                      </div>
+                    </div>
                 </div>
 
                 <!-- Custom Donation -->
@@ -1019,7 +1043,7 @@
                         $&nbsp;&nbsp;&nbsp;
                         <input type="text" placeholder="ENTER AMOUNT" />
                         <button class="donate-submit-btn" onclick="submitCustomDonation()">Donate</button>
-                      </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1107,6 +1131,14 @@
     </section>
 
     <script>
+        window.addEventListener('scroll', function () {
+            const logo = document.getElementById('logoImage');
+            if (window.scrollY > 50) {
+                logo.classList.add('shrink');
+            } else {
+                logo.classList.remove('shrink');
+            }
+        });
         document.getElementById('logoImage').addEventListener('click', function () {
             alert("Welcome to Kelsey's Kloset!");
         });
@@ -1132,13 +1164,13 @@
             window.location.href = "https://google.com";
         }
         function submitCustomDonation() {
-    const amount = document.querySelector('.custom-donation-box input').value;
-    if (amount && !isNaN(amount)) {
-      alert("You donated $" + amount + " ❤️ Thank you!");
-    } else {
-      alert("Please enter a valid amount.");
-    }
-  }
+            const amount = document.querySelector('.custom-donation-box input').value;
+            if (amount && !isNaN(amount)) {
+                alert("You donated $" + amount + " ❤️ Thank you!");
+            } else {
+                alert("Please enter a valid amount.");
+            }
+        }
     </script>
 
 </body>
