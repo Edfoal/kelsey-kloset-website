@@ -798,13 +798,85 @@
     background-color: #1d366c;
   }
   
+  /* Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html, body {
+        height: 100%;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Header */
+    #header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw; /* Force full screen width */
+        background-color: white;
+        z-index: 1000;
+        text-align: center;
+        overflow: hidden;
+        transition: padding 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
+    }
+
+    #logoImage {
+        width: 100%;
+        height: auto;
+        max-height: 500px;
+        object-fit: cover;
+        transition: width 0.5s ease, height 0.5s ease, max-width 0.5s ease;
+    }
+
+    /* Shrinked */
+    .shrink #logoImage {
+        width: auto;
+        height: 70px;
+        max-width: 200px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .shrink {
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    /* Dummy content */
+    .content {
+        margin-top: 500px; /* Push content down so it's not hidden */
+        height: 2000px;
+        background: linear-gradient(#f0f0f0, #cccccc);
+        padding-top: 20px;
+        text-align: center;
+        font-size: 24px;
+    }
     </style>
+    <script>
+        window.addEventListener('scroll', function() {
+            var header = document.getElementById('header');
+            if (window.scrollY > 50) { // Adjust number as needed
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+        });
+    </script>
 </head>
 
 <body>
 
     <!-- Top Image: Logo -->
-    <img src="https://ik.imagekit.io/2tiscfoyqs/assets/1.png" alt="Kelsey's Kloset Logo" class="half-screen-image-1" id="logoImage">
+    <!-- <img src="https://ik.imagekit.io/2tiscfoyqs/assets/1.png" alt="Kelsey's Kloset Logo" class="half-screen-image-1" id="logoImage"> -->
+
+    <header id="header">
+        <img src="https://ik.imagekit.io/2tiscfoyqs/assets/1.png" alt="Kelsey's Kloset Logo" class="half-screen-image-1" id="logoImage">
+    </header>
 
     <!-- Bottom Image: Mother and Baby
   <img src="assets/2.png" 
