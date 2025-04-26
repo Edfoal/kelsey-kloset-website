@@ -659,16 +659,145 @@
                 align-items: center;
             }
         }
-        @media (max-width: 768px) {
-    .fourth-container {
-        flex-direction: column;
-        height: auto; /* allow content height */
-    }
 
-    .fourth-container .right {
-        height: 300px; /* or any suitable height */
-    }
-}
+        @media (max-width: 768px) {
+            .fourth-container {
+                flex-direction: column;
+                height: auto;
+                /* allow content height */
+            }
+
+            .fourth-container .right {
+                height: 300px;
+                /* or any suitable height */
+            }
+        }
+
+        .kelsey-section {
+            padding: 2rem;
+            background-image: url('./assets/bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+        }
+
+        .kelsey-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .kelsey-text {
+            flex: 1 1 500px;
+            padding: 1rem;
+        }
+
+        .kelsey-text h1 {
+            font-size: 2rem;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .divider {
+            /* width: 50%; */
+            margin: 0.5rem auto 1rem auto;
+            border: 1px solid #000;
+        }
+
+        .memory {
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .story {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .kelsey-image {
+            flex: 1 1 400px;
+            padding-left: 1rem;
+            text-align: center;
+        }
+
+        .kelsey-image img {
+            width: 100%;
+            height: auto;
+            /* border-radius: 8px; */
+            object-fit: cover;
+        }
+
+        .donate-btn-section-1 {
+            display: block;
+            margin: 2rem auto 0 auto;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border: 2px solid #000;
+            background: transparent;
+            cursor: pointer;
+            transition: 0.3s;
+            letter-spacing: 2px;
+        }
+
+        .donate-btn:hover {
+            background-color: #2a4b8d;
+            color: #fff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .kelsey-container {
+                flex-direction: column;
+            }
+
+            .kelsey-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .donate-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .kelsey-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .story {
+                font-size: 0.95rem;
+            }
+
+            .memory {
+                font-size: 0.9rem;
+            }
+        }
+        .donate-submit-btn {
+    margin-left: 10px;
+    padding: 6px 12px;
+    background-color: #2a4b8d;
+    color: white;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin-top: 24px;
+  }
+
+  .donate-submit-btn:hover {
+    background-color: #1d366c;
+  }
+  
     </style>
 </head>
 
@@ -684,6 +813,43 @@
         <img src="assets/2.png" alt="Mother and Baby" />
         <div class="button-overlay" onclick="handleLearnMore()">Learn More</div>
     </div>
+
+    <section class="kelsey-section">
+        <div class="kelsey-container">
+            <div class="kelsey-text">
+                <h1>WHO IS KELSEY?<br>WHY KELSEY’S KLOSET?</h1>
+                <hr class="divider">
+                <p class="memory">In Loving Memory of Kelsey Alexandra Baker<br>
+                    (February 18, 1997 — February 21, 1997)</p>
+
+                <p class="story">
+                    Kelsey Alexandra Baker was a beautiful baby girl born to Robert and Mindy Baker on February 18, 1997
+                    at Northside Hospital in Atlanta, Georgia.
+                    Though she lived for only three days, those days were filled with immeasurable love and lasting
+                    memories. Her short time here forever changed the hearts of all who knew her.
+                </p>
+
+                <p class="story">
+                    In the days that followed, amidst heartbreak, Robert and Mindy made a choice: to honor Kelsey's
+                    memory by helping others. They carefully packed each item and began donating to charities that
+                    support new mothers and babies in need. This seemingly small gesture of healing created a spark that
+                    later became our mission.
+                </p>
+
+                <p class="story">
+                    Today, Kelsey’s Kloset is committed to providing critical care packages to mothers and families in
+                    need. We believe that out of deep sorrow, light can shine—and through Kelsey’s name, we bring love,
+                    support, and dignity to others walking their own journeys.
+                </p>
+
+                <button class="donate-btn" onclick="handleDonate()">DONATE HERE</button>
+            </div>
+
+            <div class="kelsey-image">
+                <img src="./assets/3svg.png" alt="Siblings Sleeping">
+            </div>
+        </div>
+    </section>
     <section class="defining-need">
         <div class="fourth-container">
             <div class="left">
@@ -781,7 +947,7 @@
                 education, how an infant begins their life has a significant impact on how that child grows and develops
                 throughout their lifetime.
             </p>
-            <button class="donate-btn">DONATE HERE</button>
+            <button class="donate-btn" onclick="handleDonate()">DONATE HERE</button>
         </div>
     </section>
     <section class="why-donate-section">
@@ -833,27 +999,27 @@
             <div class="divider"></div>
 
             <!-- Right: Donation Options -->
-            <div class="donation-options">
-                <div>
-
-                </div>
+            <div class="donation-options" >
                 <!-- Donate a Basket -->
-                <div class="donation-card">
-                    <div class="overlay">DONATE<br />A BASKET</div>
-                    <img src="assets/17.png" alt="Basket Donation">
-                    <div class="footer">
-                        $100
-                    </div>
+                <div class="donation-card" >
+                    <div class="overlay">DONATE A BASKET</div>
+                    <img src="assets/12svg.png" alt="Basket Donation">
+                    <div class="custom-donation-box">
+                        $&nbsp;&nbsp;&nbsp;
+                        <input type="text" value="100" readonly />
+                        <button class="donate-submit-btn" onclick="submitCustomDonation()">Donate</button>
+                      </div>
                 </div>
 
                 <!-- Custom Donation -->
                 <div class="donation-card">
-                    <div class="overlay">CUSTOM<br />DONATION</div>
-                    <img src="assets/18.png" alt="Custom Donation">
-                    <div class="footer">
-                        $$$<br />
+                    <div class="overlay">CUSTOM DONATION</div>
+                    <img src="assets/13svg.png" alt="Custom Donation">
+                    <div class="custom-donation-box">
+                        $&nbsp;&nbsp;&nbsp;
                         <input type="text" placeholder="ENTER AMOUNT" />
-                    </div>
+                        <button class="donate-submit-btn" onclick="submitCustomDonation()">Donate</button>
+                      </div>
                 </div>
             </div>
         </div>
@@ -950,10 +1116,29 @@
         });
 
         function handleLearnMore() {
-            alert("Thank you for your interest in Kelsey's Kloset!");
-            // You can replace the alert with a redirect like:
-            // window.location.href = "your-link.html";
+            const missionSection = document.querySelector('.mission-section');
+            if (missionSection) {
+                missionSection.scrollIntoView({ behavior: 'smooth' });
+            }
         }
+        function handleDonate() {
+            const donationSection = document.querySelector('.donate-section');
+            if (donationSection) {
+                donationSection.scrollIntoView({ behavior: 'smooth' })
+            }
+        }
+        function handleBasketDonation() {
+            // Redirect to a specific page or trigger action
+            window.location.href = "https://google.com";
+        }
+        function submitCustomDonation() {
+    const amount = document.querySelector('.custom-donation-box input').value;
+    if (amount && !isNaN(amount)) {
+      alert("You donated $" + amount + " ❤️ Thank you!");
+    } else {
+      alert("Please enter a valid amount.");
+    }
+  }
     </script>
 
 </body>
